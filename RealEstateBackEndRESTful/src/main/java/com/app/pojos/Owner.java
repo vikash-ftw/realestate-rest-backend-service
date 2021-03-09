@@ -186,16 +186,6 @@ public class Owner {
 			return false;
 		return true;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }
