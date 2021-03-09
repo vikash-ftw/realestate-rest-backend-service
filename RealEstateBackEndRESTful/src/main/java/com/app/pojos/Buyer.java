@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -13,8 +15,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "buyers")
-@Getter
-@Setter
 public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,7 @@ public class Buyer {
 	private LocalDate buyerRegistDate;
 
 	@ManyToMany(mappedBy = "propertyBuyers")
+	@Fetch(FetchMode.JOIN)
 	private Set<LandProperty> landProperties = new HashSet<LandProperty>();
 
 	public Buyer() {
@@ -51,6 +52,80 @@ public class Buyer {
 		this.buyerCity = buyerCity;
 		this.buyerPincode = buyerPincode;
 		this.buyerRegistDate = buyerRegistDate;
+		this.landProperties = landProperties;
+	}
+	
+	
+
+	public Integer getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(Integer buyerId) {
+		this.buyerId = buyerId;
+	}
+
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+
+	public String getBuyerPassword() {
+		return buyerPassword;
+	}
+
+	public void setBuyerPassword(String buyerPassword) {
+		this.buyerPassword = buyerPassword;
+	}
+
+	public String getBuyerPhoneNo() {
+		return buyerPhoneNo;
+	}
+
+	public void setBuyerPhoneNo(String buyerPhoneNo) {
+		this.buyerPhoneNo = buyerPhoneNo;
+	}
+
+	public String getBuyerCity() {
+		return buyerCity;
+	}
+
+	public void setBuyerCity(String buyerCity) {
+		this.buyerCity = buyerCity;
+	}
+
+	public String getBuyerPincode() {
+		return buyerPincode;
+	}
+
+	public void setBuyerPincode(String buyerPincode) {
+		this.buyerPincode = buyerPincode;
+	}
+
+	public LocalDate getBuyerRegistDate() {
+		return buyerRegistDate;
+	}
+
+	public void setBuyerRegistDate(LocalDate buyerRegistDate) {
+		this.buyerRegistDate = buyerRegistDate;
+	}
+
+	public Set<LandProperty> getLandProperties() {
+		return landProperties;
+	}
+
+	public void setLandProperties(Set<LandProperty> landProperties) {
 		this.landProperties = landProperties;
 	}
 
