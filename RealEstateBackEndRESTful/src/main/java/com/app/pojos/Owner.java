@@ -1,5 +1,6 @@
 package com.app.pojos;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -46,7 +49,10 @@ public class Owner {
 	@Column(length = 6)
 	private String ownerPinCode;
 	
-	@OneToMany(mappedBy = "", cascade = CascadeType.ALL , orphanRemoval = true)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate ownerRegistDate;
+	
+	@OneToMany(mappedBy = "propertyOwner", cascade = CascadeType.ALL , orphanRemoval = true)
 	private List<LandProperty> landProperties = new ArrayList<>();
 	
 	public Owner() {
@@ -54,7 +60,7 @@ public class Owner {
 	}
 
 	public Owner(String ownerName, String ownerEmail, String ownerPassword, String ownerPhoneNo, String ownerIdProof,
-			String ownerCity, String ownerPinCode, List<LandProperty> landProperties) {
+			String ownerCity, String ownerPinCode, LocalDate ownerRegistDate, List<LandProperty> landProperties) {
 		super();
 		this.ownerName = ownerName;
 		this.ownerEmail = ownerEmail;
@@ -63,6 +69,7 @@ public class Owner {
 		this.ownerIdProof = ownerIdProof;
 		this.ownerCity = ownerCity;
 		this.ownerPinCode = ownerPinCode;
+		this.ownerRegistDate = ownerRegistDate;
 		this.landProperties = landProperties;
 	}
 
@@ -70,8 +77,11 @@ public class Owner {
 	public String toString() {
 		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail
 				+ ", ownerPassword=" + ownerPassword + ", ownerPhoneNo=" + ownerPhoneNo + ", ownerIdProof="
-				+ ownerIdProof + ", ownerCity=" + ownerCity + ", ownerPinCode=" + ownerPinCode + "]";
+				+ ownerIdProof + ", ownerCity=" + ownerCity + ", ownerPinCode=" + ownerPinCode + ", ownerRegistDate="
+				+ ownerRegistDate + "]";
 	}
+
+	
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.app.pojos;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -11,7 +13,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "buyers")
-@Getter @Setter
+@Getter
+@Setter
 public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,14 +34,15 @@ public class Buyer {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate buyerRegistDate;
 
-	
+	@ManyToMany(mappedBy = "propertyBuyers")
+	private Set<LandProperty> landProperties = new HashSet<LandProperty>();
+
 	public Buyer() {
 		System.out.println("in buyer ctor");
 	}
 
-
 	public Buyer(String buyerName, String buyerEmail, String buyerPassword, String buyerPhoneNo, String buyerCity,
-			String buyerPincode) {
+			String buyerPincode, LocalDate buyerRegistDate, Set<LandProperty> landProperties) {
 		super();
 		this.buyerName = buyerName;
 		this.buyerEmail = buyerEmail;
@@ -46,16 +50,40 @@ public class Buyer {
 		this.buyerPhoneNo = buyerPhoneNo;
 		this.buyerCity = buyerCity;
 		this.buyerPincode = buyerPincode;
+		this.buyerRegistDate = buyerRegistDate;
+		this.landProperties = landProperties;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Buyer [buyerId=" + buyerId + ", buyerName=" + buyerName + ", buyerEmail=" + buyerEmail
 				+ ", buyerPassword=" + buyerPassword + ", buyerPhoneNo=" + buyerPhoneNo + ", buyerCity=" + buyerCity
-				+ ", buyerPincode=" + buyerPincode + "]";
+				+ ", buyerPincode=" + buyerPincode + ", buyerRegistDate=" + buyerRegistDate + "]";
 	}
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((buyerEmail == null) ? 0 : buyerEmail.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Buyer other = (Buyer) obj;
+		if (buyerEmail == null) {
+			if (other.buyerEmail != null)
+				return false;
+		} else if (!buyerEmail.equals(other.buyerEmail))
+			return false;
+		return true;
+	}
+
 }
