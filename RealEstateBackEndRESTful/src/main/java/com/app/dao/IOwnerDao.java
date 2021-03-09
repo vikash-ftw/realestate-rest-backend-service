@@ -6,4 +6,6 @@ import com.app.pojos.Owner;
 
 public interface IOwnerDao extends JpaRepository<Owner, Integer> {
 	
+	
+	
 }
