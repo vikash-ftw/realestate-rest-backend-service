@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -60,6 +65,7 @@ public class LandProperty {
 
 	@ManyToMany
 	@JoinTable(name = "favProperty_buyers", joinColumns = @JoinColumn(name = "property_id"), inverseJoinColumns = @JoinColumn(name = "buyer_id"))
+	@Fetch(FetchMode.JOIN)
 	private Set<Buyer> propertyBuyers = new HashSet<Buyer>();
 
 	@ManyToOne
@@ -87,6 +93,120 @@ public class LandProperty {
 		this.propertyPincode = propertyPincode;
 		this.propertyRegistDate = propertyRegistDate;
 		this.propertyBuyers = propertyBuyers;
+		this.propertyOwner = propertyOwner;
+	}
+	
+
+
+	public Integer getPropertyId() {
+		return propertyId;
+	}
+
+	public void setPropertyId(Integer propertyId) {
+		this.propertyId = propertyId;
+	}
+
+	public double getPropertyArea() {
+		return propertyArea;
+	}
+
+	public void setPropertyArea(double propertyArea) {
+		this.propertyArea = propertyArea;
+	}
+
+	public double getDimensionLength() {
+		return dimensionLength;
+	}
+
+	public void setDimensionLength(double dimensionLength) {
+		this.dimensionLength = dimensionLength;
+	}
+
+	public double getDimensionBreadth() {
+		return dimensionBreadth;
+	}
+
+	public void setDimensionBreadth(double dimensionBreadth) {
+		this.dimensionBreadth = dimensionBreadth;
+	}
+
+	public double getPropertyPrice() {
+		return propertyPrice;
+	}
+
+	public void setPropertyPrice(double propertyPrice) {
+		this.propertyPrice = propertyPrice;
+	}
+
+	public PropertyType getPropertyType() {
+		return propertyType;
+	}
+
+	public void setPropertyType(PropertyType propertyType) {
+		this.propertyType = propertyType;
+	}
+
+	public OwnershipType getOwnershipType() {
+		return ownershipType;
+	}
+
+	public void setOwnershipType(OwnershipType ownershipType) {
+		this.ownershipType = ownershipType;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getPropertyCity() {
+		return propertyCity;
+	}
+
+	public void setPropertyCity(String propertyCity) {
+		this.propertyCity = propertyCity;
+	}
+
+	public String getPropertyPincode() {
+		return propertyPincode;
+	}
+
+	public void setPropertyPincode(String propertyPincode) {
+		this.propertyPincode = propertyPincode;
+	}
+
+	public LocalDate getPropertyRegistDate() {
+		return propertyRegistDate;
+	}
+
+	public void setPropertyRegistDate(LocalDate propertyRegistDate) {
+		this.propertyRegistDate = propertyRegistDate;
+	}
+
+	public Set<Buyer> getPropertyBuyers() {
+		return propertyBuyers;
+	}
+
+	public void setPropertyBuyers(Set<Buyer> propertyBuyers) {
+		this.propertyBuyers = propertyBuyers;
+	}
+
+	public Owner getPropertyOwner() {
+		return propertyOwner;
+	}
+
+	public void setPropertyOwner(Owner propertyOwner) {
 		this.propertyOwner = propertyOwner;
 	}
 

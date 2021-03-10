@@ -21,7 +21,7 @@ public class AdminController {
 	private IAdminService adminService;
 	
 	public AdminController() {
-		System.out.println("in admin ctrl ");
+		System.out.println("in ctrl of "+getClass().getName());
 	}
 	
 	@GetMapping

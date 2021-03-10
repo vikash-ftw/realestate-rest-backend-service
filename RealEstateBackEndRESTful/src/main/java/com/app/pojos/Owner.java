@@ -17,6 +17,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,12 +54,14 @@ public class Owner {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate ownerRegistDate;
 	
-	@Fetch(FetchMode.JOIN)
+	
 	@OneToMany(mappedBy = "propertyOwner", cascade = CascadeType.ALL , orphanRemoval = true)
+	@JsonIgnoreProperties("propertyOwner")
+	@Fetch(FetchMode.JOIN)
 	private List<LandProperty> landProperties = new ArrayList<>();
 	
 	public Owner() {
-		// TODO Auto-generated constructor stub
+		System.out.println("in owner ctor");
 	}
 
 	public Owner(String ownerName, String ownerEmail, String ownerPassword, String ownerPhoneNo, String ownerIdProof,
@@ -185,6 +189,19 @@ public class Owner {
 		} else if (!ownerId.equals(other.ownerId))
 			return false;
 		return true;
+	}
+	
+	//helper methods for bidirectional linking
+	
+	public void addNewProperty(LandProperty p)
+	{
+		landProperties.add(p);
+		p.setPropertyOwner(this);
+	}
+	
+	public void removeProperty(LandProperty p) {
+		landProperties.remove(p);
+		p.setPropertyOwner(null);
 	}
 	
 

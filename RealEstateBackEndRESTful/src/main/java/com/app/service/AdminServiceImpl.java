@@ -18,7 +18,7 @@ public class AdminServiceImpl implements IAdminService {
 	private IAdminDao adminDao;
 	
 	public AdminServiceImpl() {
-		System.out.println("AdminService ctor");
+		System.out.println("in AdminService cld");
 	}
 
 	@Override

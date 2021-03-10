@@ -1,14 +1,12 @@
 package com.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.IOwnerDao;
-import com.app.pojos.Buyer;
 import com.app.pojos.Owner;
 
 @Service
@@ -19,7 +17,7 @@ public class OwnerServiceImpl implements IOwnerService{
 	private IOwnerDao ownerDao;
 	
 	public OwnerServiceImpl() {
-		System.out.println("Owener Service called");
+		System.out.println("in OwnerService cld");
 	}
 
 	@Override

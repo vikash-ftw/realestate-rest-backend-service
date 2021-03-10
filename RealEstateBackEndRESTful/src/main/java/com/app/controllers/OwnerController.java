@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.pojos.LandProperty;
 import com.app.pojos.Owner;
 import com.app.service.ILandPropertyService;
 import com.app.service.IOwnerService;
@@ -52,5 +53,21 @@ public class OwnerController {
 	public ResponseEntity<?> getByOwnerId(@PathVariable int ownerId) {
 		return new  ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.CREATED);
 	}
-
+	
+	@PostMapping("/newProperty/{ownerId}")
+	public ResponseEntity<?> saveNewProperty(@RequestBody LandProperty p, 
+			@PathVariable int ownerId)
+	{
+		Owner actualOwner = ownerService.getByOwnerId(ownerId);
+		actualOwner.addNewProperty(p);
+		
+		return new ResponseEntity<>(landService.saveNewProperty(p), HttpStatus.OK);
+	}
+	
+	@GetMapping("/myProperty/{ownerId}")
+	public ResponseEntity<?> getAllProperty(@PathVariable int ownerId)
+	{
+		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId).getLandProperties(), 
+				HttpStatus.OK);
+	}
 }

@@ -17,11 +17,12 @@ import com.app.service.IBuyerService;
 @RequestMapping("/buyer")
 public class BuyerController {
 	
+	//D.I
 	@Autowired
 	private IBuyerService buyerService;
 	
 	public BuyerController() {
-		System.out.println("in ctor of "+getClass().getName());
+		System.out.println("in ctrl of "+getClass().getName());
 	}
 	
 	@GetMapping

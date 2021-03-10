@@ -18,7 +18,7 @@ public class BuyerServiceImpl implements IBuyerService {
 	private IBuyerDao buyerDao;
 	
 	public BuyerServiceImpl() {
-		System.out.println("in buyer service mtd cld");
+		System.out.println("in buyerService cld");
 	}
 	
 	@Override
