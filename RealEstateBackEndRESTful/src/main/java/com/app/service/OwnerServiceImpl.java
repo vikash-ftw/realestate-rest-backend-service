@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.IOwnerDao;
+import com.app.pojos.Buyer;
 import com.app.pojos.Owner;
 
 @Service
@@ -30,6 +31,17 @@ public class OwnerServiceImpl implements IOwnerService{
 	public Owner saveOwner(Owner o) {
 		return ownerDao.save(o);
 	}
+
+	@Override
+	public Owner getOwner(String email, String password) {	
+		return ownerDao.findByOwnerEmailAndOwnerPassword(email, password);
+	}
+
+	@Override
+	public Owner getByOwnerId(int ownerId) {
+		return ownerDao.findByOwnerId(ownerId);
+	}
+	
 	
 	
 	

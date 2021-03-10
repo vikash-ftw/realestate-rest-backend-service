@@ -9,4 +9,6 @@ public interface IBuyerService {
 	List<Buyer> getAllBuyers();
 	
 	Buyer registerBuyer(Buyer b);
+	
+	Buyer getByBuyerId(int buyerId);
 }

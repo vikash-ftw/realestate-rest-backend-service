@@ -3,6 +3,7 @@ package com.app.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.app.pojos.Buyer;
 import com.app.pojos.Owner;
 
 public interface IOwnerService {
@@ -10,5 +11,9 @@ public interface IOwnerService {
 	List<Owner> getAllOwners();
 	
 	Owner saveOwner(Owner o);
+	
+	Owner getOwner(String email , String password);
+	
+	Owner getByOwnerId(int ownerId);
 
 }
