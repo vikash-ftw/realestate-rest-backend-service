@@ -6,4 +6,6 @@ import com.app.pojos.Buyer;
 
 public interface IBuyerDao extends JpaRepository<Buyer, Integer>{
 	
+	Buyer findByBuyerId(int buyerId);
+	
 }

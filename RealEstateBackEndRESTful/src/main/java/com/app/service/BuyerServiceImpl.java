@@ -30,5 +30,14 @@ public class BuyerServiceImpl implements IBuyerService {
 	public Buyer registerBuyer(Buyer b) {
 		return buyerDao.save(b);
 	}
+
+	@Override
+	public Buyer getByBuyerId(int buyerId) {	
+		return buyerDao.findByBuyerId(buyerId);
+	}
+
+	
+	
+	
 	
 }
