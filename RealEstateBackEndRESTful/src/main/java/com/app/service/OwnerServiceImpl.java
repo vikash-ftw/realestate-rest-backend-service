@@ -31,10 +31,4 @@ public class OwnerServiceImpl implements IOwnerService{
 		return ownerDao.save(o);
 	}
 	
-	
-	
-	
-	
-	
-	
 }
