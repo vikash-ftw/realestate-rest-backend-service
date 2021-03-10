@@ -3,6 +3,8 @@ package com.app.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,8 @@ public class LandPropertyController {
 	}
 	
 	@GetMapping("/city/{cityName}")
-	public List<LandProperty> LandPropertyByCity(@PathVariable String cityName) {
-		return propertyService.fetchPropertyByCity(cityName);
+	public ResponseEntity<?> LandPropertyByCity(@PathVariable String cityName) {
+		return new ResponseEntity<>(propertyService.fetchPropertyByCity(cityName),HttpStatus.OK);
 	}
 	
 }
