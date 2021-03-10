@@ -33,7 +33,7 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 	@Override
 	public List<LandProperty> fetchPropertyByCity(String city) {
-		return null;
+		return propertyDao.findByPropertyCity(city);
 	}
 
 	
