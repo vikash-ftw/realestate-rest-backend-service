@@ -31,4 +31,10 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return propertyDao.findByPropertyOwner(ownerId);
 	}
 
+	@Override
+	public List<LandProperty> fetchPropertyByCity(String city) {
+		return null;
+	}
+
+	
 }

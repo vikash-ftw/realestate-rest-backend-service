@@ -9,5 +9,7 @@ import com.app.pojos.LandProperty;
 public interface ILandProperty extends JpaRepository<LandProperty, Integer> {
 	
 	List<LandProperty> findByPropertyOwner(int ownerId);
+	
+	List<LandProperty> findByPropertyCity(String city);
 
 }
