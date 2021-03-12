@@ -1,11 +1,13 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_Excep.MyCustomException;
 import com.app.dao.IOwnerDao;
 import com.app.pojos.Owner;
 
@@ -32,6 +34,7 @@ public class OwnerServiceImpl implements IOwnerService{
 
 	@Override
 	public Owner getOwner(String email, String password) {	
+		System.out.println("in owner login service");
 		return ownerDao.findByOwnerEmailAndOwnerPassword(email, password);
 	}
 
@@ -42,9 +45,19 @@ public class OwnerServiceImpl implements IOwnerService{
 
 	@Override
 	public Owner deleteByOwnerId(int ownerId) {
-		Owner o= ownerDao.findByOwnerId(ownerId);
-		return null;
+		Owner o= ownerDao.findById(ownerId).orElseThrow(() -> new MyCustomException("Owner Id "+ownerId+"not exits"));
+		ownerDao.delete(o);
+		return o;
+		
 	}
+
+	@Override
+	public Owner updateOwner(Owner o , int ownerId) {
+		Owner owner = ownerDao.findById(ownerId).orElseThrow(() -> new MyCustomException("Owner Id "+ownerId+"not exits"));
+		return ownerDao.save(o);
+		
+	}
+	
 	
 	
 	

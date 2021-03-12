@@ -13,5 +13,5 @@ public interface IOwnerDao extends JpaRepository<Owner, Integer> {
 	
 	Owner findByOwnerId(int ownerId);
 	
-	Owner deleteByOwnerId(int ownerId);
+	
 }

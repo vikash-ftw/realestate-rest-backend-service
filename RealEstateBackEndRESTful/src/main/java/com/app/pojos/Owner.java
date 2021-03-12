@@ -77,6 +77,7 @@ public class Owner {
 		this.ownerRegistDate = ownerRegistDate;
 		this.landProperties = landProperties;
 	}
+	
 
 	public Integer getOwnerId() {
 		return ownerId;
