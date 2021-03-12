@@ -1,11 +1,11 @@
 package com.app.dto;
 
-public class OwnerDTO {
+public class LoginDTO {
 
 	private String email;
 	private String password;
 	
-	public OwnerDTO(String email, String password) {
+	public LoginDTO(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;

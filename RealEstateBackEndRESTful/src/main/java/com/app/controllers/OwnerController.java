@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.OwnerDTO;
+import com.app.dto.LoginDTO;
 import com.app.pojos.LandProperty;
 import com.app.pojos.Owner;
 import com.app.service.ILandPropertyService;
@@ -52,7 +52,7 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> getOwner(@RequestBody OwnerDTO owner) {
+	public ResponseEntity<?> getOwner(@RequestBody LoginDTO owner) {
 		System.out.println("in getOwner mapping");
 		System.out.println(owner.getEmail()+" "+owner.getPassword());
 		return new ResponseEntity<>(ownerService.getOwner(owner.getEmail(), owner.getPassword()) , HttpStatus.CREATED);
