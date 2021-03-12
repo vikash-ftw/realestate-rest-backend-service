@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_Excep.MyCustomException;
 import com.app.dao.IBuyerDao;
 import com.app.pojos.Buyer;
 
@@ -32,12 +33,16 @@ public class BuyerServiceImpl implements IBuyerService {
 	}
 
 	@Override
-	public Buyer getByBuyerId(int buyerId) {	
-		return buyerDao.findByBuyerId(buyerId);
+	public Buyer getBuyerById(int buyerId) {	
+		return buyerDao.findById(buyerId).orElseThrow(() -> new MyCustomException("BuyerId "+buyerId+" doesn't exist"));
 	}
 
-	
-	
-	
+	@Override
+	public Buyer deleteByBuyerId(int buyerId) {
+		Buyer buyer = buyerDao.findById(buyerId)
+				.orElseThrow(() -> new MyCustomException("id " + buyerId + " not exist"));
+		buyerDao.delete(buyer);
+		return buyer;
+	}
 	
 }

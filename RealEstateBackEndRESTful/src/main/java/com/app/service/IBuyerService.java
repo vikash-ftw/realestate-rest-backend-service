@@ -10,5 +10,7 @@ public interface IBuyerService {
 	
 	Buyer registerBuyer(Buyer b);
 	
-	Buyer getByBuyerId(int buyerId);
+	Buyer getBuyerById(int buyerId);
+	
+	Buyer deleteByBuyerId(int buyerId);
 }
