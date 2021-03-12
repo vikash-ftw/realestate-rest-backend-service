@@ -15,5 +15,7 @@ public interface IOwnerService {
 	Owner getOwner(String email , String password);
 	
 	Owner getByOwnerId(int ownerId);
+	
+	Owner deleteByOwnerId(int ownerId);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.pojos.LandProperty;
@@ -43,12 +44,18 @@ public class OwnerController {
 		return new ResponseEntity<>(ownerService.saveOwner(o) , HttpStatus.CREATED);
 	}
 	
-//	@GetMapping("/{email}/{password}")
-//	public ResponseEntity<?> getOwner(@PathVariable String email, @PathVariable String password) {
-//		System.out.println("in getOwner mapping");
-//		return new ResponseEntity<>(ownerController.getOwner(email, password) , HttpStatus.CREATED);
-//	}
+	@PostMapping("/login")
+	public ResponseEntity<?> getOwner(@RequestBody String email, @RequestBody String password) {
+		System.out.println("in getOwner mapping");
+		return new ResponseEntity<>(ownerService.getOwner(email, password) , HttpStatus.CREATED);
+	}
 	
+//	@PostMapping
+//	public ResponseEntity<?> getOwner(@RequestBody String email){
+//		return null;
+//		
+//	}
+//	
 	@GetMapping("/{ownerId}")
 	public ResponseEntity<?> getByOwnerId(@PathVariable int ownerId) {
 		return new  ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.CREATED);

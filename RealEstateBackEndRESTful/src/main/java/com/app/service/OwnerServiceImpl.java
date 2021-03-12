@@ -39,6 +39,14 @@ public class OwnerServiceImpl implements IOwnerService{
 	public Owner getByOwnerId(int ownerId) {
 		return ownerDao.findByOwnerId(ownerId);
 	}
+
+	@Override
+	public Owner deleteByOwnerId(int ownerId) {
+		Owner o= ownerDao.findByOwnerId(ownerId);
+		return null;
+	}
+	
+	
 	
 	
 }
