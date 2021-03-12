@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_Excep.MyCustomException;
 import com.app.dao.IBuyerDao;
+import com.app.dao.ILandProperty;
+import com.app.dto.PropertyBuyerLink;
 import com.app.pojos.Buyer;
+import com.app.pojos.LandProperty;
 
 @Service
 @Transactional
@@ -17,6 +20,9 @@ public class BuyerServiceImpl implements IBuyerService {
 	//D.I
 	@Autowired
 	private IBuyerDao buyerDao;
+	
+	@Autowired
+	private ILandProperty propertyDao;
 	
 	public BuyerServiceImpl() {
 		System.out.println("in buyerService cld");
@@ -48,6 +54,18 @@ public class BuyerServiceImpl implements IBuyerService {
 	@Override
 	public Buyer validateBuyerLogin(String email, String password) {
 		return buyerDao.validateBuyerLogin(email, password);
-	}
+	}	
 	
+	//property buyer favourite link
+	@Override
+	public String markFav(PropertyBuyerLink pbl) {
+		System.out.println(pbl);
+		String msg = "linked failed";
+		LandProperty prop = propertyDao.findById(pbl.getPropertyId()).get();
+		Buyer buyer = buyerDao.findById(pbl.getBuyerId()).get();
+		buyer.addFavProperty(prop);
+		msg = "link established";
+		return msg;
+		
+	}
 }

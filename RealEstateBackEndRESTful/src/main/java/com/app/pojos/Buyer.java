@@ -160,5 +160,16 @@ public class Buyer {
 			return false;
 		return true;
 	}
-
+	
+	//helperMethod for linking
+	public void addFavProperty(LandProperty l) {
+		landProperties.add(l);
+		l.getPropertyBuyers().add(this);
+	}
+	
+	//helperMethod for unlinking
+	public void removeFavProperty(LandProperty l) {
+		landProperties.remove(l);
+		l.getPropertyBuyers().remove(this);
+	}
 }

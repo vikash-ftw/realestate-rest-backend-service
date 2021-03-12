@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.LoginDTO;
+import com.app.dto.PropertyBuyerLink;
 import com.app.pojos.Buyer;
 import com.app.service.IBuyerService;
+import com.app.service.ILandPropertyService;
 
 @RestController
 @RequestMapping("/buyer")
@@ -22,6 +25,9 @@ public class BuyerController {
 	//D.I
 	@Autowired
 	private IBuyerService buyerService;
+	
+	@Autowired
+	private ILandPropertyService landService;
 	
 	public BuyerController() {
 		System.out.println("in ctrl of "+getClass().getName());
@@ -74,6 +80,13 @@ public class BuyerController {
 		}
 		
 	}
+	
+	@PostMapping("/markFav")
+	public ResponseEntity<?> markFavorite(@RequestBody PropertyBuyerLink pbl)
+	{
+		return new ResponseEntity<>(buyerService.markFav(pbl),HttpStatus.OK);
+	}
+	
 	
 	
 	
