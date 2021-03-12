@@ -49,7 +49,7 @@ public class OwnerController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> getOwner(@RequestBody LoginDTO owner) {
+	public ResponseEntity<?> validateOwnerLogin(@RequestBody LoginDTO owner) {
 		System.out.println("in getOwner mapping");
 		System.out.println(owner.getEmail() + " " + owner.getPassword());
 		return new ResponseEntity<>(ownerService.getOwner(owner.getEmail(), owner.getPassword()), HttpStatus.CREATED);
