@@ -90,4 +90,11 @@ public class OwnerController {
 		return new ResponseEntity<>(ownerService.updateOwner(o, ownerId), HttpStatus.OK);
 	}
 	
+	@PutMapping("/updateProp/{ownerId}/{propId}")
+	public ResponseEntity<?> updateProperty(@PathVariable int propId,@PathVariable int ownerId ,@RequestBody LandProperty l){
+		Owner o = ownerService.getByOwnerId(ownerId);
+		l.setPropertyOwner(o);
+		return new ResponseEntity<>(landService.updateProperty(propId, l) , HttpStatus.OK);
+	}
+	
 }

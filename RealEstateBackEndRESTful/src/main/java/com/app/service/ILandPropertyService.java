@@ -22,4 +22,7 @@ public interface ILandPropertyService {
 	
 	//delete prop by id
 	LandProperty deletePropertyById(int propId);
+	
+	//update prop by id
+	LandProperty updateProperty(int propId , LandProperty l);
 }

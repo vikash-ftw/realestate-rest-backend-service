@@ -50,5 +50,12 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return propertyDao.findById(propId).get();
 	}
 
+	@Override
+	public LandProperty updateProperty(int propId, LandProperty l) {
+		LandProperty pl=propertyDao.findById(propId).get();
+		propertyDao.save(l);
+		return pl;
+	}
+
 	
 }
