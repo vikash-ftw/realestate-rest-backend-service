@@ -44,5 +44,10 @@ public class BuyerServiceImpl implements IBuyerService {
 		buyerDao.delete(buyer);
 		return buyer;
 	}
+
+	@Override
+	public Buyer validateBuyerLogin(String email, String password) {
+		return buyerDao.validateBuyerLogin(email, password);
+	}
 	
 }

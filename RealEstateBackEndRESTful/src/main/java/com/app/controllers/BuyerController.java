@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.LoginDTO;
 import com.app.pojos.Buyer;
 import com.app.service.IBuyerService;
 
@@ -59,6 +60,19 @@ public class BuyerController {
 		}catch (RuntimeException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	// buyer login validation
+	@PostMapping("/login")
+	public ResponseEntity<?> validateBuyerLogin(@RequestBody LoginDTO b)
+	{
+		Buyer validBuyer = buyerService.validateBuyerLogin(b.getEmail(), b.getPassword());
+		if(validBuyer != null) {
+			return new ResponseEntity<>(validBuyer, HttpStatus.ACCEPTED);
+		}else {
+			return new ResponseEntity<>("invalid login", HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 	

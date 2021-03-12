@@ -13,4 +13,6 @@ public interface IBuyerService {
 	Buyer getBuyerById(int buyerId);
 	
 	Buyer deleteByBuyerId(int buyerId);
+	
+	Buyer validateBuyerLogin(String email, String password);
 }
