@@ -1,5 +1,7 @@
 package com.app.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,10 +74,10 @@ public class OwnerController {
 		return new ResponseEntity<>(landService.saveNewProperty(p), HttpStatus.OK);
 	}
 
-	@GetMapping("/myProperty/{ownerId}")
-	public ResponseEntity<?> getAllProperty(@PathVariable int ownerId) {
-		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId).getLandProperties(), HttpStatus.OK);
-	}
+//	@GetMapping("/myProperty/{ownerId}")
+//	public ResponseEntity<?> getAllProperty(@PathVariable int ownerId) {
+//		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId).getLandProperties(), HttpStatus.OK);
+//	}
 
 	@DeleteMapping("/delete/{ownerId}")
 	public ResponseEntity<?> deleteOwner(@PathVariable int ownerId) {
@@ -90,5 +92,13 @@ public class OwnerController {
 		Owner exitingO = ownerService.getByOwnerId(ownerId);
 		o.setLandProperties(exitingO.getLandProperties());
 		return new ResponseEntity<>(ownerService.updateOwner(o, ownerId), HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> getAllProperty(@PathVariable int ownerId)
+	{
+		List<LandProperty> propList = ownerService.getByOwnerId(ownerId).getLandProperties();
+		System.out.println(propList);
+		return new ResponseEntity<>(propList, 
+				HttpStatus.OK);
 	}
 }
