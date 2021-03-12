@@ -30,6 +30,12 @@ public class AdminServiceImpl implements IAdminService {
 	public Admin saveAdmin(Admin a) {
 		return adminDao.save(a);
 	}
+
+	@Override
+	public Admin adminLogin(String email, String password) {
+		return adminDao.findByAdminEmailAndAdminPassword(email, password);
+	}
+	
 	
 	
 }

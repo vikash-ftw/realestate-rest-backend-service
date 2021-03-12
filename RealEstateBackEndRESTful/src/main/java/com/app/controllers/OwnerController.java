@@ -50,17 +50,13 @@ public class OwnerController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> validateOwnerLogin(@RequestBody LoginDTO owner) {
-		System.out.println("in getOwner mapping");
-		System.out.println(owner.getEmail() + " " + owner.getPassword());
-		return new ResponseEntity<>(ownerService.getOwner(owner.getEmail(), owner.getPassword()), HttpStatus.CREATED);
+		Owner validOwner = ownerService.getOwner(owner.getEmail(), owner.getPassword());
+		if(validOwner != null) 
+			return new ResponseEntity<>(validOwner, HttpStatus.ACCEPTED);
+		
+		return new ResponseEntity<>("invalid login", HttpStatus.NOT_FOUND);
 	}
 
-//	@PostMapping
-//	public ResponseEntity<?> getOwner(@RequestBody String email){
-//		return null;
-//		
-//	}
-//	
 	@GetMapping("/{ownerId}")
 	public ResponseEntity<?> getByOwnerId(@PathVariable int ownerId) {
 		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.CREATED);

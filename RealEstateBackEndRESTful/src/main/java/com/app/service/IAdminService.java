@@ -12,4 +12,6 @@ public interface IAdminService {
 	//save new admin
 	Admin saveAdmin(Admin a);
 	
+	Admin adminLogin(String email, String password);
+	
 }

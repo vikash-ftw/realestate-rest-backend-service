@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.LoginDTO;
 import com.app.pojos.Admin;
 import com.app.service.IAdminService;
 
@@ -34,5 +35,14 @@ public class AdminController {
 	public ResponseEntity<?> saveNewAdmin(@RequestBody Admin a)
 	{
 		return new ResponseEntity<>(adminService.saveAdmin(a), HttpStatus.OK);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> validateAdminLogin(@RequestBody LoginDTO admin){
+		Admin validAdmin = adminService.adminLogin(admin.getEmail(), admin.getPassword());
+		if(validAdmin != null)
+			return new ResponseEntity<>(validAdmin,HttpStatus.ACCEPTED);
+		
+		return new ResponseEntity<>("invalid login",HttpStatus.NOT_FOUND);
 	}
 }
