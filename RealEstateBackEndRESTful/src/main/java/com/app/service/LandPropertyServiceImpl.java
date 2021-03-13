@@ -11,6 +11,8 @@ import com.app.custom_Excep.MyCustomException;
 import com.app.dao.ILandProperty;
 import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
+import com.app.pojos.OwnershipType;
+import com.app.pojos.PropertyType;
 
 @Service
 @Transactional
@@ -34,10 +36,6 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return propertyDao.findByPropertyOwner(ownerId);
 	}
 
-	@Override
-	public List<LandProperty> fetchPropertyByCity(String city) {
-		return propertyDao.findByPropertyCity(city);
-	}
 
 	@Override
 	public LandProperty deletePropertyByEntity(LandProperty l) {
@@ -69,5 +67,17 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return favBuyers;
 	}
 
+	@Override
+	public List<LandProperty> fetchPropByType(PropertyType propType) {
+		
+		return propertyDao.findByPropertyType(propType);
+	}
+
+	@Override
+	public List<LandProperty> fetchPropByOwnerType(OwnershipType ownerType) {
+		return propertyDao.findByOwnershipType(ownerType);
+	}
+
+	
 	
 }

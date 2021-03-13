@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.ILandProperty;
 import com.app.pojos.LandProperty;
+import com.app.pojos.OwnershipType;
+import com.app.pojos.PropertyType;
 import com.app.service.ILandPropertyService;
 
 @RestController
@@ -29,12 +31,7 @@ public class LandPropertyController {
 		System.out.println("in ctrl of "+getClass().getName());
 	}
 	
-	
-	//fetch property by city
-	@GetMapping("/city/{cityName}")
-	public ResponseEntity<?> LandPropertyByCity(@PathVariable String cityName) {
-		return new ResponseEntity<>(propertyService.fetchPropertyByCity(cityName),HttpStatus.OK);
-	}
+
 	
 //	//delete property by id
 //	@DeleteMapping("/delete/{propId}")
@@ -55,5 +52,15 @@ public class LandPropertyController {
 	@GetMapping("/prop/{propId}")
 	public ResponseEntity<?> fetchByPropId(@PathVariable int propId){
 		return new ResponseEntity<>(propertyService.fetchById(propId), HttpStatus.OK);
+	}
+	
+	@GetMapping("/propType/{propType}")
+	public ResponseEntity<?> searchByType(@PathVariable String propType){
+		return new ResponseEntity<>(propertyService.fetchPropByType(PropertyType.valueOf(propType.toUpperCase())), HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("ownerType/{ownerType}")
+	public ResponseEntity<?> searchByOwnerType(@PathVariable String ownerType){
+		return new ResponseEntity<>(propertyService.fetchPropByOwnerType(OwnershipType.valueOf(ownerType.toUpperCase())),HttpStatus.ACCEPTED);
 	}
 }

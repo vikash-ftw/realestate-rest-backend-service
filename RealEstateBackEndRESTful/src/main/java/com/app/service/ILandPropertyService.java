@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
+import com.app.pojos.OwnershipType;
+import com.app.pojos.PropertyType;
 
 public interface ILandPropertyService {
 	
@@ -15,8 +17,8 @@ public interface ILandPropertyService {
 	//fetch property by ownerId
 	List<LandProperty> fetchPropertyByOId(int ownerId);
 	
-	//fetch by cityName
-	List<LandProperty> fetchPropertyByCity(String city);
+	
+	
 	
 	//fetch prop by id
 	LandProperty fetchById(int propId);
@@ -29,4 +31,8 @@ public interface ILandPropertyService {
 	
 	// fetch favBuyers of prop
 	List<Buyer> fetchAllFavBuyers(int propId);
+	
+	List<LandProperty> fetchPropByType(PropertyType propType);
+	
+	List<LandProperty> fetchPropByOwnerType(OwnershipType ownerType);
 }
