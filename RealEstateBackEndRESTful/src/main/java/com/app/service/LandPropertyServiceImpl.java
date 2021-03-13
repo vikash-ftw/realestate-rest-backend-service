@@ -36,7 +36,9 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 	@Override
 	public List<LandProperty> fetchPropertyByCity(String city) {
-		return propertyDao.findByPropertyCity(city);
+//		return propertyDao.findByPropertyCity(city);
+//		return propertyDao.findByPropertyCityLike(city);
+		return propertyDao.findByPropertyCityContaining(city);
 	}
 
 	@Override
@@ -68,6 +70,10 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		}
 		return favBuyers;
 	}
-
+	
+	@Override
+	public List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice) {
+		return propertyDao.findByPropertyPriceBetween(minPrice, maxPrice);
+	}
 	
 }

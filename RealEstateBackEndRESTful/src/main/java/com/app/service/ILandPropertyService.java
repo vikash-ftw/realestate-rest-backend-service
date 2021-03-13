@@ -10,7 +10,6 @@ public interface ILandPropertyService {
 	// add new landProperty
 	LandProperty saveNewProperty(LandProperty l);
 	
-	//fetch pr
 	
 	//fetch property by ownerId
 	List<LandProperty> fetchPropertyByOId(int ownerId);
@@ -29,4 +28,8 @@ public interface ILandPropertyService {
 	
 	// fetch favBuyers of prop
 	List<Buyer> fetchAllFavBuyers(int propId);
+	
+	//fetch prop by priceRange
+	List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice);
+	
 }

@@ -56,4 +56,18 @@ public class LandPropertyController {
 	public ResponseEntity<?> fetchByPropId(@PathVariable int propId){
 		return new ResponseEntity<>(propertyService.fetchById(propId), HttpStatus.OK);
 	}
+	
+	//price range
+	@GetMapping("/priceBudget/{minPrice}/{maxPrice}")
+	public ResponseEntity<?> fetchByPriceRange(@PathVariable double minPrice, @PathVariable double maxPrice)
+	{
+		return new ResponseEntity<>(propertyService.fetchPropertyByPriceBetween(minPrice, maxPrice), HttpStatus.OK);
+	}
+	
+	//dimension l x b range
+	@GetMapping("/dimension/{length}/{breadth}")
+	public ResponseEntity<?> fetchByDimension(@PathVariable double length, @PathVariable double breadth)
+	{
+		return null;
+	}
 }
