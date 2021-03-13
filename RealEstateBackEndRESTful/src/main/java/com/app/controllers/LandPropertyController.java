@@ -77,4 +77,9 @@ public class LandPropertyController {
 	{
 		return null;
 	}
+	
+	@GetMapping("/city/{city}")
+	public ResponseEntity<?> fetchByCity(@PathVariable String city){
+		return new ResponseEntity<>(propertyService.fetchPropertyByCity(city), HttpStatus.OK);
+	}
 }
