@@ -12,12 +12,11 @@ public interface ILandPropertyService {
 	// add new landProperty
 	LandProperty saveNewProperty(LandProperty l);
 	
-	//fetch pr
 	
 	//fetch property by ownerId
 	List<LandProperty> fetchPropertyByOId(int ownerId);
 	
-	
+	 List<LandProperty> fetchPropertyByCity(String city);
 	
 	
 	//fetch prop by id
@@ -32,7 +31,13 @@ public interface ILandPropertyService {
 	// fetch favBuyers of prop
 	List<Buyer> fetchAllFavBuyers(int propId);
 	
+
 	List<LandProperty> fetchPropByType(PropertyType propType);
 	
 	List<LandProperty> fetchPropByOwnerType(OwnershipType ownerType);
+
+	//fetch prop by priceRange
+	List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice);
+	
+
 }

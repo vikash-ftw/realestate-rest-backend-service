@@ -38,6 +38,14 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 
 	@Override
+	public List<LandProperty> fetchPropertyByCity(String city) {
+//		return propertyDao.findByPropertyCity(city);
+//		return propertyDao.findByPropertyCityLike(city);
+		return propertyDao.findByPropertyCityContaining(city);
+	}
+
+
+	@Override
 	public LandProperty deletePropertyByEntity(LandProperty l) {
 		System.out.println("raeaching here to del prop");
 		propertyDao.delete(l);
@@ -67,6 +75,7 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return favBuyers;
 	}
 
+
 	@Override
 	public List<LandProperty> fetchPropByType(PropertyType propType) {
 		
@@ -79,5 +88,11 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 	}
 
 	
+
 	
+	@Override
+	public List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice) {
+		return propertyDao.findByPropertyPriceBetween(minPrice, maxPrice);
+	}
+
 }

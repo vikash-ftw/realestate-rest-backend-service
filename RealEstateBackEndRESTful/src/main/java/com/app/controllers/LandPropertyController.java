@@ -54,6 +54,7 @@ public class LandPropertyController {
 		return new ResponseEntity<>(propertyService.fetchById(propId), HttpStatus.OK);
 	}
 	
+
 	@GetMapping("/propType/{propType}")
 	public ResponseEntity<?> searchByType(@PathVariable String propType){
 		return new ResponseEntity<>(propertyService.fetchPropByType(PropertyType.valueOf(propType.toUpperCase())), HttpStatus.ACCEPTED);
@@ -62,5 +63,18 @@ public class LandPropertyController {
 	@GetMapping("ownerType/{ownerType}")
 	public ResponseEntity<?> searchByOwnerType(@PathVariable String ownerType){
 		return new ResponseEntity<>(propertyService.fetchPropByOwnerType(OwnershipType.valueOf(ownerType.toUpperCase())),HttpStatus.ACCEPTED);
+	}
+	//price range
+	@GetMapping("/priceBudget/{minPrice}/{maxPrice}")
+	public ResponseEntity<?> fetchByPriceRange(@PathVariable double minPrice, @PathVariable double maxPrice)
+	{
+		return new ResponseEntity<>(propertyService.fetchPropertyByPriceBetween(minPrice, maxPrice), HttpStatus.OK);
+	}
+	
+	//dimension l x b range
+	@GetMapping("/dimension/{length}/{breadth}")
+	public ResponseEntity<?> fetchByDimension(@PathVariable double length, @PathVariable double breadth)
+	{
+		return null;
 	}
 }
