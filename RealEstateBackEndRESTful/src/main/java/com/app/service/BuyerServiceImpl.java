@@ -56,6 +56,14 @@ public class BuyerServiceImpl implements IBuyerService {
 		return buyerDao.validateBuyerLogin(email, password);
 	}	
 	
+	//update buyer
+	@Override
+	public Buyer updateBuyerById(Buyer b, int buyerId) {
+		Buyer buyer = buyerDao.findById(buyerId)
+				.orElseThrow(() -> new MyCustomException("No buyer exist with id "+ buyerId));
+		return buyerDao.save(b);
+	}
+	
 	//property buyer favourite link
 	@Override
 	public String markFav(PropertyBuyerLink pbl) {

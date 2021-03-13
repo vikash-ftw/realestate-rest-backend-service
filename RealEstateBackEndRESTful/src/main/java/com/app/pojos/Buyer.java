@@ -10,6 +10,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +37,7 @@ public class Buyer {
 	private LocalDate buyerRegistDate;
 
 	@ManyToMany(mappedBy = "propertyBuyers")
+	@JsonIgnoreProperties("propertyBuyers")
 	@Fetch(FetchMode.JOIN)
 	private Set<LandProperty> landProperties = new HashSet<LandProperty>();
 

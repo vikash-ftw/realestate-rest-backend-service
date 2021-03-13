@@ -29,6 +29,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties({"propertyBuyers" , "propertyOwner"})
 public class LandProperty {
 
 	@Id

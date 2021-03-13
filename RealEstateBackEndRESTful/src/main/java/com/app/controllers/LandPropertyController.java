@@ -29,11 +29,14 @@ public class LandPropertyController {
 		System.out.println("in ctrl of "+getClass().getName());
 	}
 	
+	
+	//fetch property by city
 	@GetMapping("/city/{cityName}")
 	public ResponseEntity<?> LandPropertyByCity(@PathVariable String cityName) {
 		return new ResponseEntity<>(propertyService.fetchPropertyByCity(cityName),HttpStatus.OK);
 	}
 	
+	//delete property by id
 	@DeleteMapping("/delete/{propId}")
 	public ResponseEntity<?> deletePropertyById(@PathVariable int propId){
 		try {
@@ -42,6 +45,7 @@ public class LandPropertyController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
+	
 	
 //	@PutMapping("/update/{propId}")
 //	public ResponseEntity<?> updateProperty(@PathVariable int propId, @RequestBody LandProperty l){

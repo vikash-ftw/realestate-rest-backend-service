@@ -17,5 +17,7 @@ public interface IBuyerService {
 	
 	Buyer validateBuyerLogin(String email, String password);
 	
+	Buyer updateBuyerById(Buyer b, int buyerId);
+	
 	String markFav(PropertyBuyerLink pbl);
 }

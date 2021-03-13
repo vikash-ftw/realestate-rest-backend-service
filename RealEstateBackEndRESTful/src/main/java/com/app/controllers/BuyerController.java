@@ -81,12 +81,25 @@ public class BuyerController {
 		
 	}
 	
+	// buyer marks his fav property
 	@PostMapping("/markFav")
 	public ResponseEntity<?> markFavorite(@RequestBody PropertyBuyerLink pbl)
 	{
 		return new ResponseEntity<>(buyerService.markFav(pbl),HttpStatus.OK);
 	}
 	
+	
+	// update buyer by id
+	@PutMapping("/update/{buyerId}")
+	public ResponseEntity<?> updateBuyerProfile(@PathVariable int buyerId ,@RequestBody Buyer upbuyer)
+	{
+		try {
+			return new ResponseEntity<>(buyerService.updateBuyerById(upbuyer, buyerId), HttpStatus.OK);
+		}catch (RuntimeException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+		
+	}
 	
 	
 	
