@@ -46,9 +46,8 @@ public class LandPropertyController {
 		}
 	}
 	
-	
-//	@PutMapping("/update/{propId}")
-//	public ResponseEntity<?> updateProperty(@PathVariable int propId, @RequestBody LandProperty l){
-//		return new ResponseEntity<>(propertyService.updateProperty(propId, l) , HttpStatus.OK);
-//	}
+	@GetMapping("/prop/{propId}")
+	public ResponseEntity<?> fetchByPropId(@PathVariable int propId){
+		return new ResponseEntity<>(propertyService.fetchById(propId), HttpStatus.OK);
+	}
 }

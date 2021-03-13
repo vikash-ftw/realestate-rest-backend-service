@@ -56,6 +56,8 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		propertyDao.save(l);
 		return pl;
 	}
+	
+	
 
 	
 }

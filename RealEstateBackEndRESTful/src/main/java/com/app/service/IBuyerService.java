@@ -20,4 +20,6 @@ public interface IBuyerService {
 	Buyer updateBuyerById(Buyer b, int buyerId);
 	
 	String markFav(PropertyBuyerLink pbl);
+	
+	String unFav(PropertyBuyerLink pbl);
 }
