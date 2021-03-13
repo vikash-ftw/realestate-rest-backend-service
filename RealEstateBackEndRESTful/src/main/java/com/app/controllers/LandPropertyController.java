@@ -36,19 +36,20 @@ public class LandPropertyController {
 		return new ResponseEntity<>(propertyService.fetchPropertyByCity(cityName),HttpStatus.OK);
 	}
 	
-	//delete property by id
-	@DeleteMapping("/delete/{propId}")
-	public ResponseEntity<?> deletePropertyById(@PathVariable int propId){
-		try {
-			return new ResponseEntity<>(propertyService.deletePropertyById(propId), HttpStatus.OK);
-		}catch (RuntimeException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-		}
+//	//delete property by id
+//	@DeleteMapping("/delete/{propId}")
+//	public ResponseEntity<?> deletePropertyById(@PathVariable int propId){
+//		try {
+//			return new ResponseEntity<>(propertyService.deletePropertyById(propId), HttpStatus.OK);
+//		}catch (RuntimeException e) {
+//			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//		}
+//	}
+	
+	@GetMapping("/favBuyers/{propId}")
+	public ResponseEntity<?> fetchAllFavBuyers(@PathVariable int propId)
+	{
+		return new ResponseEntity<>(propertyService.fetchAllFavBuyers(propId), HttpStatus.OK);
 	}
 	
-	
-//	@PutMapping("/update/{propId}")
-//	public ResponseEntity<?> updateProperty(@PathVariable int propId, @RequestBody LandProperty l){
-//		return new ResponseEntity<>(propertyService.updateProperty(propId, l) , HttpStatus.OK);
-//	}
 }

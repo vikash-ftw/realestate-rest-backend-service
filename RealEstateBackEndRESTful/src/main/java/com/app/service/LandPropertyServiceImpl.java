@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_Excep.MyCustomException;
 import com.app.dao.ILandProperty;
+import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
 
 @Service
@@ -38,11 +40,11 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 	}
 
 	@Override
-	public LandProperty deletePropertyById(int propId) {
-		LandProperty prop = propertyDao.findById(propId)
-				.orElseThrow(() -> new MyCustomException("propertyId : "+ propId+" doesn't exist"));
-		propertyDao.delete(prop);
-		return prop;
+	public LandProperty deletePropertyByEntity(LandProperty l) {
+		System.out.println("raeaching here to del prop");
+		propertyDao.delete(l);
+		System.out.println("delted prop");
+		return l;
 	}
 
 	@Override
@@ -56,6 +58,15 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		propertyDao.save(l);
 		return pl;
 	}
-
+	
+	@Override
+	public List<Buyer> fetchAllFavBuyers(int propId) {
+		LandProperty prop = fetchById(propId);
+		List<Buyer> favBuyers  = new ArrayList<>();
+		for(Buyer b : prop.getPropertyBuyers()) {
+			favBuyers.add(b);
+		}
+		return favBuyers;
+	}
 	
 }

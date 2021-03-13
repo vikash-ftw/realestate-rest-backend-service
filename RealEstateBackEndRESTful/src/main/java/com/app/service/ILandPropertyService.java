@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
 
 public interface ILandPropertyService {
@@ -21,8 +22,11 @@ public interface ILandPropertyService {
 	LandProperty fetchById(int propId);
 	
 	//delete prop by id
-	LandProperty deletePropertyById(int propId);
+	LandProperty deletePropertyByEntity(LandProperty l);
 	
 	//update prop by id
 	LandProperty updateProperty(int propId , LandProperty l);
+	
+	// fetch favBuyers of prop
+	List<Buyer> fetchAllFavBuyers(int propId);
 }

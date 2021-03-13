@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dao.IBuyerDao;
 import com.app.dto.LoginDTO;
+import com.app.dto.PropertyBuyerLink;
+import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
 import com.app.pojos.Owner;
+import com.app.service.IBuyerService;
 import com.app.service.ILandPropertyService;
 import com.app.service.IOwnerService;
 
@@ -30,6 +34,9 @@ public class OwnerController {
 
 	@Autowired
 	private ILandPropertyService landService;
+	
+	@Autowired
+	private IBuyerService buyerService;
 
 	public OwnerController() {
 		System.out.println("in ctrl of " + getClass().getName());
@@ -104,6 +111,30 @@ public class OwnerController {
 		Owner o = ownerService.getByOwnerId(ownerId);
 		l.setPropertyOwner(o);
 		return new ResponseEntity<>(landService.updateProperty(propId, l) , HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteProp/{ownerId}/{propId}")
+	public ResponseEntity<?> deletePropertyById(@PathVariable int ownerId, @PathVariable int propId)
+	{
+		try {
+			LandProperty prop = landService.fetchById(propId);
+			Owner owner = ownerService.getByOwnerId(ownerId);
+			System.out.println("here1");
+			List<Buyer> favBuyers = landService.fetchAllFavBuyers(propId);
+			System.out.println("here2");
+			favBuyers.forEach(b -> {
+				PropertyBuyerLink pbl = new PropertyBuyerLink();
+				pbl.setBuyerId(b.getBuyerId());
+				pbl.setPropertyId(propId);
+			});
+			System.out.println("here3");
+			owner.removeProperty(prop);
+			System.out.println("here4");
+			return new ResponseEntity<>(landService.deletePropertyByEntity(prop), HttpStatus.ACCEPTED);
+		}catch (RuntimeException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 }

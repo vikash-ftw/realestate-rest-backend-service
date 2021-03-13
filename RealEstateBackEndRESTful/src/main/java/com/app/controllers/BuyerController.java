@@ -100,13 +100,5 @@ public class BuyerController {
 		}
 		
 	}
-	
-	//this is to try try
-	//second try
-	
-	// change A
-	// this is to test github working
-	//change B
 
-	
 }
