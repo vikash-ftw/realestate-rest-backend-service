@@ -74,6 +74,15 @@ public class BuyerServiceImpl implements IBuyerService {
 		buyer.addFavProperty(prop);
 		msg = "link established";
 		return msg;
-		
 	}
+
+	@Override
+	public String unFav(PropertyBuyerLink pbl) {
+		LandProperty prop = propertyDao.findById(pbl.getPropertyId()).get();
+		Buyer buyer = buyerDao.findById(pbl.getBuyerId()).get();
+		buyer.removeFavProperty(prop);
+		return "list is remove from Fev";
+	}
+	
+	
 }

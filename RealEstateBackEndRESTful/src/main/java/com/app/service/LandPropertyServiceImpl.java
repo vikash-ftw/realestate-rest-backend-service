@@ -68,5 +68,6 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		}
 		return favBuyers;
 	}
+
 	
 }

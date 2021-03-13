@@ -100,5 +100,9 @@ public class BuyerController {
 		}
 		
 	}
-
+	
+	@PutMapping("/unFav")
+	public ResponseEntity<?> unFavorite(@RequestBody PropertyBuyerLink pbl){
+		return new ResponseEntity<>(buyerService.unFav(pbl), HttpStatus.OK);
+	}
 }

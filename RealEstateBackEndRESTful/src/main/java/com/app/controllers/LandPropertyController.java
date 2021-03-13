@@ -52,4 +52,8 @@ public class LandPropertyController {
 		return new ResponseEntity<>(propertyService.fetchAllFavBuyers(propId), HttpStatus.OK);
 	}
 	
+	@GetMapping("/prop/{propId}")
+	public ResponseEntity<?> fetchByPropId(@PathVariable int propId){
+		return new ResponseEntity<>(propertyService.fetchById(propId), HttpStatus.OK);
+	}
 }

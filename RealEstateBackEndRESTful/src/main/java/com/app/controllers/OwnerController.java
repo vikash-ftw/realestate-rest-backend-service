@@ -126,6 +126,7 @@ public class OwnerController {
 				PropertyBuyerLink pbl = new PropertyBuyerLink();
 				pbl.setBuyerId(b.getBuyerId());
 				pbl.setPropertyId(propId);
+				buyerService.unFav(pbl);
 			});
 			System.out.println("here3");
 			owner.removeProperty(prop);
