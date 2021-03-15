@@ -35,6 +35,9 @@ public class LandProperty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyId;
+	
+	@Column(length = 30, unique = true)
+	private String propertyTitle;
 
 	private double propertyArea;
 
@@ -77,11 +80,14 @@ public class LandProperty {
 		System.out.println("in landProperty ctor");
 	}
 
-	public LandProperty(int propertyArea, int dimensionLength, int dimensionBreadth, double propertyPrice,
-			PropertyType propertyType, OwnershipType ownershipType, String latitude, String longitude,
-			String propertyCity, String propertyPincode, LocalDate propertyRegistDate, Set<Buyer> propertyBuyers,
-			Owner propertyOwner) {
+	
+
+	public LandProperty(String propertyTitle, double propertyArea, double dimensionLength, double dimensionBreadth,
+			double propertyPrice, PropertyType propertyType, OwnershipType ownershipType, String latitude,
+			String longitude, String propertyCity, String propertyPincode, LocalDate propertyRegistDate,
+			Set<Buyer> propertyBuyers, Owner propertyOwner) {
 		super();
+		this.propertyTitle = propertyTitle;
 		this.propertyArea = propertyArea;
 		this.dimensionLength = dimensionLength;
 		this.dimensionBreadth = dimensionBreadth;
@@ -97,14 +103,20 @@ public class LandProperty {
 		this.propertyOwner = propertyOwner;
 	}
 	
-
-
 	public Integer getPropertyId() {
 		return propertyId;
 	}
 
 	public void setPropertyId(Integer propertyId) {
 		this.propertyId = propertyId;
+	}
+
+	public String getPropertyTitle() {
+		return propertyTitle;
+	}
+
+	public void setPropertyTitle(String propertyTitle) {
+		this.propertyTitle = propertyTitle;
 	}
 
 	public double getPropertyArea() {
@@ -209,15 +221,6 @@ public class LandProperty {
 
 	public void setPropertyOwner(Owner propertyOwner) {
 		this.propertyOwner = propertyOwner;
-	}
-
-	@Override
-	public String toString() {
-		return "LandProperty [propertyId=" + propertyId + ", propertyArea=" + propertyArea + ", dimensionLength="
-				+ dimensionLength + ", dimensionBreadth=" + dimensionBreadth + ", propertyPrice=" + propertyPrice
-				+ ", propertyType=" + propertyType + ", ownershipType=" + ownershipType + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", propertyCity=" + propertyCity + ", propertyPincode=" + propertyPincode
-				+ ", propertyRegistDate=" + propertyRegistDate + "]";
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import com.app.service.IOwnerService;
 
 @RestController
 @RequestMapping("/owner")
+@CrossOrigin
 public class OwnerController {
 
 	// D.I
@@ -70,7 +72,12 @@ public class OwnerController {
 	//fetch owner by id
 	@GetMapping("/{ownerId}")
 	public ResponseEntity<?> getByOwnerId(@PathVariable int ownerId) {
-		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.CREATED);
+		try {
+			return new ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.ACCEPTED);
+		}catch (RuntimeException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 	// save owner's new property
@@ -117,21 +124,26 @@ public class OwnerController {
 	public ResponseEntity<?> deletePropertyById(@PathVariable int ownerId, @PathVariable int propId)
 	{
 		try {
-			LandProperty prop = landService.fetchById(propId);
-			Owner owner = ownerService.getByOwnerId(ownerId);
-			System.out.println("here1");
-			List<Buyer> favBuyers = landService.fetchAllFavBuyers(propId);
-			System.out.println("here2");
-			favBuyers.forEach(b -> {
-				PropertyBuyerLink pbl = new PropertyBuyerLink();
-				pbl.setBuyerId(b.getBuyerId());
-				pbl.setPropertyId(propId);
-				buyerService.unFav(pbl);
-			});
-			System.out.println("here3");
-			owner.removeProperty(prop);
-			System.out.println("here4");
-			return new ResponseEntity<>(landService.deletePropertyByEntity(prop), HttpStatus.ACCEPTED);
+//			Owner owner = ownerService.getByOwnerId(ownerId);
+//			LandProperty prop = landService.fetchById(propId);
+//			System.out.println("here1");
+//			List<Buyer> favBuyers = landService.fetchAllFavBuyers(propId);
+//			System.out.println("here2");
+//			if(favBuyers.size() > 0) {
+//				System.out.println("it has buyers linking");
+//				favBuyers.forEach(b -> {
+//					PropertyBuyerLink pbl = new PropertyBuyerLink();
+//					pbl.setBuyerId(b.getBuyerId());
+//					pbl.setPropertyId(propId);
+//					System.out.println(pbl);
+//					buyerService.unFav(pbl);
+//				});
+//			}
+//			System.out.println("here3");
+//			prop.setPropertyOwner(null);
+//			owner.removeProperty(prop);
+//			System.out.println("here4"+prop);
+			return new ResponseEntity<>(landService.deletePropertyById(ownerId, propId), HttpStatus.ACCEPTED);
 		}catch (RuntimeException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

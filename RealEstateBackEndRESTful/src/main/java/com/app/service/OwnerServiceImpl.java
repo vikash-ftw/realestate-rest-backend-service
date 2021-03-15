@@ -40,7 +40,7 @@ public class OwnerServiceImpl implements IOwnerService{
 
 	@Override
 	public Owner getByOwnerId(int ownerId) {
-		return ownerDao.findByOwnerId(ownerId);
+		return ownerDao.findById(ownerId).orElseThrow(() -> new MyCustomException("ownerId "+ ownerId +" doesn't exist"));
 	}
 
 	@Override

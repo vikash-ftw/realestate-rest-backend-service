@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_Excep.MyCustomException;
 import com.app.dao.IBuyerDao;
-import com.app.dao.ILandProperty;
+import com.app.dao.ILandPropertyDao;
 import com.app.dto.PropertyBuyerLink;
 import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
@@ -22,7 +22,7 @@ public class BuyerServiceImpl implements IBuyerService {
 	private IBuyerDao buyerDao;
 	
 	@Autowired
-	private ILandProperty propertyDao;
+	private ILandPropertyDao propertyDao;
 	
 	public BuyerServiceImpl() {
 		System.out.println("in buyerService cld");

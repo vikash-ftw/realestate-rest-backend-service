@@ -9,11 +9,9 @@ import com.app.pojos.LandProperty;
 import com.app.pojos.OwnershipType;
 import com.app.pojos.PropertyType;
 
-public interface ILandProperty extends JpaRepository<LandProperty, Integer> {
+public interface ILandPropertyDao extends JpaRepository<LandProperty, Integer> {
 	
 	List<LandProperty> findByPropertyOwner(int ownerId);
-	
-
 	
 	List<LandProperty> findByPropertyType(PropertyType propType);
 
@@ -26,4 +24,7 @@ public interface ILandProperty extends JpaRepository<LandProperty, Integer> {
 	List<LandProperty> findByPropertyPriceBetween(double minPrice, double maxPrice);
 
 	List<LandProperty> findByOwnershipType(OwnershipType ownerType);
+	
+	@Query("select l from LandProperty l where l.dimensionLength <= ?1 and l.dimensionBreadth <= ?2")
+	List<LandProperty> findByDimensionRange(double length, double breadth);
 }

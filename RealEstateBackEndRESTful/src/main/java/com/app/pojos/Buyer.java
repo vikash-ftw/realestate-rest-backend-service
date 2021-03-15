@@ -17,6 +17,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "buyers")
+@JsonIgnoreProperties({"landProperties"})
 public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

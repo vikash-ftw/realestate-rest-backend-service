@@ -11,7 +11,4 @@ public interface IOwnerDao extends JpaRepository<Owner, Integer> {
 	@Query("select o from Owner o where o.ownerEmail = :email and o.ownerPassword = :password")
 	Owner findByOwnerEmailAndOwnerPassword(String email , String password);
 	
-	Owner findByOwnerId(int ownerId);
-	
-	
 }
