@@ -48,7 +48,7 @@ public class Owner {
 	@Column(length = 10)
 	private String ownerCity;
 	
-	@Column(length = 6)
+	@Column(length = 10)
 	private String ownerPincode;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
