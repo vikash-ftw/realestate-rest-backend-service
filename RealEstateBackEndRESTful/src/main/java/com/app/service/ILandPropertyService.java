@@ -16,14 +16,15 @@ public interface ILandPropertyService {
 	//fetch property by ownerId
 	List<LandProperty> fetchPropertyByOId(int ownerId);
 	
-	 List<LandProperty> fetchPropertyByCity(String city);
+	//fetch property by cityName
+	List<LandProperty> fetchPropertyByCity(String city);
 	
 	
 	//fetch prop by id
 	LandProperty fetchById(int propId);
 	
-	//delete prop by id
-	LandProperty deletePropertyByEntity(LandProperty l);
+	//delete prop by id and owner Id
+	LandProperty deletePropertyById(int ownerId, int propId);
 	
 	//update prop by id
 	LandProperty updateProperty(int propId , LandProperty l);
@@ -38,6 +39,9 @@ public interface ILandPropertyService {
 
 	//fetch prop by priceRange
 	List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice);
+	
+	//fetch prop by dimension
+	List<LandProperty> fetchPropertyByDimension(double length, double breadth);
 	
 
 }

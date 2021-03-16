@@ -1,7 +1,6 @@
 package com.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,9 @@ public class OwnerServiceImpl implements IOwnerService{
 
 	@Override
 	public Owner getByOwnerId(int ownerId) {
-		return ownerDao.findByOwnerId(ownerId);
+//		return ownerDao.findById(ownerId).orElseThrow(() -> new MyCustomException("ownerId "+ ownerId +" doesn't exist"));
+		return ownerDao.findByOwnerId(ownerId)
+				.orElseThrow(() -> new MyCustomException("ownerId "+ ownerId +" doesn't exist"));
 	}
 
 	@Override

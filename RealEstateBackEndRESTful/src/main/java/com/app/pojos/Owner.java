@@ -19,8 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "owners")
@@ -196,11 +194,13 @@ public class Owner {
 	
 	public void addNewProperty(LandProperty p)
 	{
+		System.out.println("adding prop to owner");
 		landProperties.add(p);
 		p.setPropertyOwner(this);
 	}
 	
 	public void removeProperty(LandProperty p) {
+		System.out.println("removing prop from owner");
 		landProperties.remove(p);
 		p.setPropertyOwner(null);
 	}

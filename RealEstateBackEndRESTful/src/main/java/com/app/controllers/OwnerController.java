@@ -15,19 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dao.IBuyerDao;
 import com.app.dto.LoginDTO;
-import com.app.dto.PropertyBuyerLink;
-import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
 import com.app.pojos.Owner;
-import com.app.service.IBuyerService;
 import com.app.service.ILandPropertyService;
 import com.app.service.IOwnerService;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/owner")
+@CrossOrigin
 public class OwnerController {
 
 	// D.I
@@ -37,8 +34,6 @@ public class OwnerController {
 	@Autowired
 	private ILandPropertyService landService;
 	
-	@Autowired
-	private IBuyerService buyerService;
 
 	public OwnerController() {
 		System.out.println("in ctrl of " + getClass().getName());
@@ -49,7 +44,7 @@ public class OwnerController {
 	@GetMapping
 	public ResponseEntity<?> getAllOwners() {
 		System.out.println("in mapping");
-		return new ResponseEntity<>(ownerService.getAllOwners(), HttpStatus.CREATED);
+		return new ResponseEntity<>(ownerService.getAllOwners(), HttpStatus.OK);
 	}
 	
 	// save new owner
@@ -72,7 +67,12 @@ public class OwnerController {
 	//fetch owner by id
 	@GetMapping("/{ownerId}")
 	public ResponseEntity<?> getByOwnerId(@PathVariable int ownerId) {
-		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.CREATED);
+		try {
+			return new ResponseEntity<>(ownerService.getByOwnerId(ownerId), HttpStatus.OK);
+		}catch (RuntimeException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 	// save owner's new property
@@ -87,7 +87,9 @@ public class OwnerController {
 	// get owner's all property by his id
 	@GetMapping("/myProperty/{ownerId}")
 	public ResponseEntity<?> getAllProperty(@PathVariable int ownerId) {
-		return new ResponseEntity<>(ownerService.getByOwnerId(ownerId).getLandProperties(), HttpStatus.OK);
+		List<LandProperty> propsList = ownerService.getByOwnerId(ownerId).getLandProperties();
+		System.out.println(propsList);
+		return new ResponseEntity<>(propsList, HttpStatus.OK);
 	}
 	
 	//delete owner by id
@@ -100,7 +102,7 @@ public class OwnerController {
 	@PutMapping("/update/{ownerId}")
 	public ResponseEntity<?> updateOwner(@RequestBody Owner o, @PathVariable int ownerId) {
 		// getById -> owner instance
-		// owner.getterListProperty -> ListOf Proprties
+		// owner.getterListProperty -> ListOf Properties
 		// owner.setListP
 		Owner exitingO = ownerService.getByOwnerId(ownerId);
 		o.setLandProperties(exitingO.getLandProperties());
@@ -119,21 +121,26 @@ public class OwnerController {
 	public ResponseEntity<?> deletePropertyById(@PathVariable int ownerId, @PathVariable int propId)
 	{
 		try {
-			LandProperty prop = landService.fetchById(propId);
-			Owner owner = ownerService.getByOwnerId(ownerId);
-			System.out.println("here1");
-			List<Buyer> favBuyers = landService.fetchAllFavBuyers(propId);
-			System.out.println("here2");
-			favBuyers.forEach(b -> {
-				PropertyBuyerLink pbl = new PropertyBuyerLink();
-				pbl.setBuyerId(b.getBuyerId());
-				pbl.setPropertyId(propId);
-				buyerService.unFav(pbl);
-			});
-			System.out.println("here3");
-			owner.removeProperty(prop);
-			System.out.println("here4");
-			return new ResponseEntity<>(landService.deletePropertyByEntity(prop), HttpStatus.ACCEPTED);
+//			Owner owner = ownerService.getByOwnerId(ownerId);
+//			LandProperty prop = landService.fetchById(propId);
+//			System.out.println("here1");
+//			List<Buyer> favBuyers = landService.fetchAllFavBuyers(propId);
+//			System.out.println("here2");
+//			if(favBuyers.size() > 0) {
+//				System.out.println("it has buyers linking");
+//				favBuyers.forEach(b -> {
+//					PropertyBuyerLink pbl = new PropertyBuyerLink();
+//					pbl.setBuyerId(b.getBuyerId());
+//					pbl.setPropertyId(propId);
+//					System.out.println(pbl);
+//					buyerService.unFav(pbl);
+//				});
+//			}
+//			System.out.println("here3");
+//			prop.setPropertyOwner(null);
+//			owner.removeProperty(prop);
+//			System.out.println("here4"+prop);
+			return new ResponseEntity<>(landService.deletePropertyById(ownerId, propId), HttpStatus.ACCEPTED);
 		}catch (RuntimeException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

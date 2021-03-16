@@ -17,19 +17,16 @@ import com.app.dto.LoginDTO;
 import com.app.dto.PropertyBuyerLink;
 import com.app.pojos.Buyer;
 import com.app.service.IBuyerService;
-import com.app.service.ILandPropertyService;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/buyer")
+@CrossOrigin
 public class BuyerController {
 	
 	//D.I
 	@Autowired
 	private IBuyerService buyerService;
-	
-	@Autowired
-	private ILandPropertyService landService;
 	
 	public BuyerController() {
 		System.out.println("in ctrl of "+getClass().getName());

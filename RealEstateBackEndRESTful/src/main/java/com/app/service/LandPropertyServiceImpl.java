@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_Excep.MyCustomException;
-import com.app.dao.ILandProperty;
+import com.app.dao.ILandPropertyDao;
+import com.app.dao.IOwnerDao;
 import com.app.pojos.Buyer;
 import com.app.pojos.LandProperty;
+import com.app.pojos.Owner;
 import com.app.pojos.OwnershipType;
 import com.app.pojos.PropertyType;
 
@@ -20,7 +22,10 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 	//D.I
 	@Autowired
-	private ILandProperty propertyDao;
+	private ILandPropertyDao propertyDao;
+	
+	@Autowired
+	private IOwnerDao ownerDao;
 	
 	public LandPropertyServiceImpl() {
 		System.out.println("in land service cld");
@@ -46,21 +51,28 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 
 	@Override
-	public LandProperty deletePropertyByEntity(LandProperty l) {
-		System.out.println("raeaching here to del prop");
-		propertyDao.delete(l);
-		System.out.println("delted prop");
-		return l;
+	public LandProperty deletePropertyById(int ownerId, int propId) {
+		System.out.println("service method cld to del prop");
+		Owner validOwner = ownerDao.findByOwnerId(ownerId)
+				.orElseThrow(() -> new MyCustomException("ownerId "+ownerId+" doesn't exist"));
+		LandProperty validProp = propertyDao.findById(propId)
+				.orElseThrow(() -> new MyCustomException("propertyId "+propId+" doesn't exist"));
+		
+		validOwner.removeProperty(validProp);
+		propertyDao.deleteById(propId);
+		return validProp;
 	}
+		
 
 	@Override
 	public LandProperty fetchById(int propId) {
-		return propertyDao.findById(propId).get();
+		return propertyDao.findById(propId).orElseThrow(() -> new MyCustomException("PropertyId "+ propId +" doesn't exist"));
 	}
 
 	@Override
 	public LandProperty updateProperty(int propId, LandProperty l) {
-		LandProperty pl=propertyDao.findById(propId).get();
+		LandProperty pl=propertyDao.findById(propId)
+				.orElseThrow(() -> new MyCustomException("propId "+ propId+" not exists."));
 		propertyDao.save(l);
 		return pl;
 	}
@@ -87,12 +99,14 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return propertyDao.findByOwnershipType(ownerType);
 	}
 
-	
-
-	
 	@Override
 	public List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice) {
 		return propertyDao.findByPropertyPriceBetween(minPrice, maxPrice);
+	}
+	
+	@Override
+	public List<LandProperty> fetchPropertyByDimension(double length, double breadth) {
+		return propertyDao.findByDimensionRange(length, breadth);
 	}
 
 }
