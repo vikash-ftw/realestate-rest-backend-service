@@ -35,6 +35,11 @@ public class AdminServiceImpl implements IAdminService {
 	public Admin adminLogin(String email, String password) {
 		return adminDao.findByAdminEmailAndAdminPassword(email, password);
 	}
+
+	@Override
+	public Admin getAdminById(int adminId) {
+		return adminDao.findById(adminId).get();
+	}
 	
 	
 	

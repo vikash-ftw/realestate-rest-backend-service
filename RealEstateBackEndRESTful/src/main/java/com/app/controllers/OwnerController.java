@@ -22,7 +22,6 @@ import com.app.service.ILandPropertyService;
 import com.app.service.IOwnerService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/owner")
 @CrossOrigin
 public class OwnerController {

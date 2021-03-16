@@ -14,4 +14,6 @@ public interface IAdminService {
 	
 	Admin adminLogin(String email, String password);
 	
+	Admin getAdminById(int adminId);
+	
 }

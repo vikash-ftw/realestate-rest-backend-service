@@ -19,7 +19,6 @@ import com.app.pojos.Buyer;
 import com.app.service.IBuyerService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/buyer")
 @CrossOrigin
 public class BuyerController {

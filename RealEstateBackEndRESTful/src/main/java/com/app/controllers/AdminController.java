@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,12 @@ public class AdminController {
 	public ResponseEntity<?> getAllAdmins()
 	{
 		return new ResponseEntity<>(adminService.fetchAllAdmins(), HttpStatus.OK);
+	}
+	
+	//fetch by id
+	@GetMapping("/{adminId}")
+	public ResponseEntity<?> getByAdminId(@PathVariable int adminId){
+		return new ResponseEntity<>(adminService.getAdminById(adminId) , HttpStatus.OK);
 	}
 	
 	//save new admin
