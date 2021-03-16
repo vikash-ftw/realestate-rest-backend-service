@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
-@Getter
-@Setter
 @JsonIgnoreProperties({"propertyBuyers" , "propertyOwner"})
 public class LandProperty {
 
@@ -36,8 +30,8 @@ public class LandProperty {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyId;
 	
-	@Column(length = 30, unique = true)
-	private String propertyTitle;
+//	@Column(length = 30, unique = true)
+//	private String propertyTitle;
 
 	private double propertyArea;
 
@@ -70,7 +64,7 @@ public class LandProperty {
 	@ManyToMany
 	@JoinTable(name = "favProperty_buyers", joinColumns = @JoinColumn(name = "property_id"), inverseJoinColumns = @JoinColumn(name = "buyer_id"))
 	@Fetch(FetchMode.JOIN)
-	private Set<Buyer> propertyBuyers = new HashSet<Buyer>();
+	private Set<Buyer> propertyBuyers = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "o_id", nullable = false)
@@ -80,14 +74,13 @@ public class LandProperty {
 		System.out.println("in landProperty ctor");
 	}
 
-	
-
 	public LandProperty(String propertyTitle, double propertyArea, double dimensionLength, double dimensionBreadth,
 			double propertyPrice, PropertyType propertyType, OwnershipType ownershipType, String latitude,
 			String longitude, String propertyCity, String propertyPincode, LocalDate propertyRegistDate,
-			Set<Buyer> propertyBuyers, Owner propertyOwner) {
+			Set<Buyer> propertyBuyers, Owner propertyOwner) 
+	{
 		super();
-		this.propertyTitle = propertyTitle;
+//		this.propertyTitle = propertyTitle;
 		this.propertyArea = propertyArea;
 		this.dimensionLength = dimensionLength;
 		this.dimensionBreadth = dimensionBreadth;
@@ -111,13 +104,13 @@ public class LandProperty {
 		this.propertyId = propertyId;
 	}
 
-	public String getPropertyTitle() {
-		return propertyTitle;
-	}
-
-	public void setPropertyTitle(String propertyTitle) {
-		this.propertyTitle = propertyTitle;
-	}
+//	public String getPropertyTitle() {
+//		return propertyTitle;
+//	}
+//
+//	public void setPropertyTitle(String propertyTitle) {
+//		this.propertyTitle = propertyTitle;
+//	}
 
 	public double getPropertyArea() {
 		return propertyArea;
@@ -221,6 +214,16 @@ public class LandProperty {
 
 	public void setPropertyOwner(Owner propertyOwner) {
 		this.propertyOwner = propertyOwner;
+	}
+	
+	@Override
+	public String toString() {
+		return "LandProperty [propertyId=" + propertyId + /*", propertyTitle=" + propertyTitle +*/ ", propertyArea="
+				+ propertyArea + ", dimensionLength=" + dimensionLength + ", dimensionBreadth=" + dimensionBreadth
+				+ ", propertyPrice=" + propertyPrice + ", propertyType=" + propertyType + ", ownershipType="
+				+ ownershipType + ", latitude=" + latitude + ", longitude=" + longitude + ", propertyCity="
+				+ propertyCity + ", propertyPincode=" + propertyPincode + ", propertyRegistDate=" + propertyRegistDate
+				+ "]";
 	}
 
 	@Override

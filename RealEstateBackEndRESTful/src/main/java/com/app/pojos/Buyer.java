@@ -4,7 +4,13 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -12,12 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "buyers")
-@JsonIgnoreProperties({"landProperties"})
 public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +42,7 @@ public class Buyer {
 	@ManyToMany(mappedBy = "propertyBuyers")
 	@JsonIgnoreProperties("propertyBuyers")
 	@Fetch(FetchMode.JOIN)
-	private Set<LandProperty> landProperties = new HashSet<LandProperty>();
+	private Set<LandProperty> landProperties = new HashSet<>();
 
 	public Buyer() {
 		System.out.println("in buyer ctor");
@@ -176,4 +178,5 @@ public class Buyer {
 		landProperties.remove(l);
 		l.getPropertyBuyers().remove(this);
 	}
+	
 }

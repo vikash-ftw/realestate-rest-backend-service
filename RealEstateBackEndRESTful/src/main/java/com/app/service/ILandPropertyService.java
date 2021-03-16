@@ -16,7 +16,8 @@ public interface ILandPropertyService {
 	//fetch property by ownerId
 	List<LandProperty> fetchPropertyByOId(int ownerId);
 	
-	 List<LandProperty> fetchPropertyByCity(String city);
+	//fetch property by cityName
+	List<LandProperty> fetchPropertyByCity(String city);
 	
 	
 	//fetch prop by id

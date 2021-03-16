@@ -19,12 +19,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "owners")
-@JsonIgnoreProperties({"landProperties"})
 public class Owner {
 	
 	@Id

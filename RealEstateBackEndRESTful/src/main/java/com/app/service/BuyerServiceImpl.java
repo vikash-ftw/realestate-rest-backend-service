@@ -67,10 +67,11 @@ public class BuyerServiceImpl implements IBuyerService {
 	//property buyer favourite link
 	@Override
 	public String markFav(PropertyBuyerLink pbl) {
-		System.out.println(pbl);
 		String msg = "linked failed";
-		LandProperty prop = propertyDao.findById(pbl.getPropertyId()).get();
-		Buyer buyer = buyerDao.findById(pbl.getBuyerId()).get();
+		LandProperty prop = propertyDao.findById(pbl.getPropertyId())
+				.orElseThrow(() -> new MyCustomException("invalid propId"));
+		Buyer buyer = buyerDao.findById(pbl.getBuyerId())
+				.orElseThrow(() -> new MyCustomException("invalid buyerId"));
 		buyer.addFavProperty(prop);
 		msg = "link established";
 		return msg;
@@ -78,10 +79,14 @@ public class BuyerServiceImpl implements IBuyerService {
 
 	@Override
 	public String unFav(PropertyBuyerLink pbl) {
-		LandProperty prop = propertyDao.findById(pbl.getPropertyId()).get();
-		Buyer buyer = buyerDao.findById(pbl.getBuyerId()).get();
+		String msg = "unmarking fav failed";
+		LandProperty prop = propertyDao.findById(pbl.getPropertyId())
+				.orElseThrow(() -> new MyCustomException("invalid propId"));
+		Buyer buyer = buyerDao.findById(pbl.getBuyerId())
+				.orElseThrow(() -> new MyCustomException("invalid buyerId"));
 		buyer.removeFavProperty(prop);
-		return "list is remove from Fev";
+		msg = "unmarking fav successfull";
+		return msg;
 	}
 	
 	

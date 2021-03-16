@@ -52,18 +52,17 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 	@Override
 	public LandProperty deletePropertyById(int ownerId, int propId) {
-		
-		Owner validOwner = ownerDao.findById(ownerId).orElseThrow(() -> new MyCustomException("ownerId "+ownerId+" doesn't exist"));
 		System.out.println("service method cld to del prop");
+		Owner validOwner = ownerDao.findByOwnerId(ownerId)
+				.orElseThrow(() -> new MyCustomException("ownerId "+ownerId+" doesn't exist"));
 		LandProperty validProp = propertyDao.findById(propId)
 				.orElseThrow(() -> new MyCustomException("propertyId "+propId+" doesn't exist"));
-		System.out.println("about to delete");
+		
 		validOwner.removeProperty(validProp);
-		System.out.println("owner: "+validProp.getPropertyOwner());
 		propertyDao.deleteById(propId);
 		return validProp;
 	}
-	
+		
 
 	@Override
 	public LandProperty fetchById(int propId) {
@@ -72,7 +71,8 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 
 	@Override
 	public LandProperty updateProperty(int propId, LandProperty l) {
-		LandProperty pl=propertyDao.findById(propId).get();
+		LandProperty pl=propertyDao.findById(propId)
+				.orElseThrow(() -> new MyCustomException("propId "+ propId+" not exists."));
 		propertyDao.save(l);
 		return pl;
 	}
