@@ -12,11 +12,11 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer adminId;
-	@Column(length = 30)
+	@Column(length = 50)
 	private String adminName;
-	@Column(length = 30)
+	@Column(length = 50, unique = true, nullable = false)
 	private String adminEmail;
-	@Column(length = 20)
+	@Column(length = 20, nullable = false)
 	private String adminPassword;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate adminRegistDate;

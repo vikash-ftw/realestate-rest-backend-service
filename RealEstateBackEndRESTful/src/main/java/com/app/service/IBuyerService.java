@@ -1,9 +1,11 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.app.dto.PropertyBuyerLink;
 import com.app.pojos.Buyer;
+import com.app.pojos.LandProperty;
 
 public interface IBuyerService {
 	
@@ -22,4 +24,7 @@ public interface IBuyerService {
 	String markFav(PropertyBuyerLink pbl);
 	
 	String unFav(PropertyBuyerLink pbl);
+	
+	Set<LandProperty> grabAllfav(int buyerId);
+	
 }

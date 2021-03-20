@@ -23,15 +23,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"propertyBuyers" , "propertyOwner"})
+@JsonIgnoreProperties({"propertyBuyers"})
 public class LandProperty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyId;
 	
-//	@Column(length = 30, unique = true)
-//	private String propertyTitle;
+	@Column(length = 30, nullable = false)
+	private String propertyTitle;
 
 	private double propertyArea;
 
@@ -47,14 +47,16 @@ public class LandProperty {
 	@Enumerated(EnumType.STRING)
 	private OwnershipType ownershipType;
 
+	@Column(nullable = false)
 	private String latitude;
-
+	
+	@Column(nullable = false)
 	private String longitude;
 
-	@Column(length = 20)
+	@Column(length = 20, nullable = false)
 	private String propertyCity;
 
-	@Column(length = 6)
+	@Column(length = 6, nullable = false)
 	private String propertyPincode;
 	
 
@@ -80,7 +82,7 @@ public class LandProperty {
 			Set<Buyer> propertyBuyers, Owner propertyOwner) 
 	{
 		super();
-//		this.propertyTitle = propertyTitle;
+		this.propertyTitle = propertyTitle;
 		this.propertyArea = propertyArea;
 		this.dimensionLength = dimensionLength;
 		this.dimensionBreadth = dimensionBreadth;
@@ -104,13 +106,13 @@ public class LandProperty {
 		this.propertyId = propertyId;
 	}
 
-//	public String getPropertyTitle() {
-//		return propertyTitle;
-//	}
-//
-//	public void setPropertyTitle(String propertyTitle) {
-//		this.propertyTitle = propertyTitle;
-//	}
+	public String getPropertyTitle() {
+		return propertyTitle;
+	}
+
+	public void setPropertyTitle(String propertyTitle) {
+		this.propertyTitle = propertyTitle;
+	}
 
 	public double getPropertyArea() {
 		return propertyArea;
@@ -218,7 +220,7 @@ public class LandProperty {
 	
 	@Override
 	public String toString() {
-		return "LandProperty [propertyId=" + propertyId + /*", propertyTitle=" + propertyTitle +*/ ", propertyArea="
+		return "LandProperty [propertyId=" + propertyId + ", propertyTitle=" + propertyTitle + ", propertyArea="
 				+ propertyArea + ", dimensionLength=" + dimensionLength + ", dimensionBreadth=" + dimensionBreadth
 				+ ", propertyPrice=" + propertyPrice + ", propertyType=" + propertyType + ", ownershipType="
 				+ ownershipType + ", latitude=" + latitude + ", longitude=" + longitude + ", propertyCity="

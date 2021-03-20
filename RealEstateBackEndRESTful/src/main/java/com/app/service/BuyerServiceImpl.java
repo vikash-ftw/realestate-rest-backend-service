@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,10 @@ public class BuyerServiceImpl implements IBuyerService {
 		return msg;
 	}
 	
-	
+	@Override
+	public Set<LandProperty> grabAllfav(int buyerId) {
+		Buyer buyer = buyerDao.findById(buyerId)
+				.orElseThrow(() -> new MyCustomException("invalid buyerId"));
+		return buyer.getLandProperties();
+	}
 }

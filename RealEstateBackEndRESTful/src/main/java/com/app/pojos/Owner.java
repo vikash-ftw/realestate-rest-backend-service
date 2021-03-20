@@ -22,31 +22,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "owners")
+@JsonIgnoreProperties({"landProperties"})
 public class Owner {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ownerId;
 	
-	@Column(length = 20)
+	@Column(length = 50)
 	private String ownerName;
 	
-	@Column(length = 30 , unique = true)
+	@Column(length = 50 , unique = true, nullable = false)
 	private String ownerEmail;
 	
-	@Column(length = 15)
+	@Column(length = 20, nullable = false)
 	private String ownerPassword;
 	
-	@Column(length = 10 , unique = true)
+	@Column(length = 10 , unique = true, nullable = false)
 	private String ownerPhoneNo;
 	
-	@Column(length = 16 , unique = true)
+	@Column(length = 16 , unique = true, nullable = false)
 	private String ownerIdProof;
 	
-	@Column(length = 10)
+	@Column(length = 20)
 	private String ownerCity;
 	
-	@Column(length = 10)
+	@Column(length = 6)
 	private String ownerPincode;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

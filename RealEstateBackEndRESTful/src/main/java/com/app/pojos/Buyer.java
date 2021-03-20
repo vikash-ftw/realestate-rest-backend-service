@@ -24,13 +24,13 @@ public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer buyerId;
-	@Column(length = 20)
+	@Column(length = 50)
 	private String buyerName;
-	@Column(length = 30, unique = true)
+	@Column(length = 50, unique = true, nullable = false)
 	private String buyerEmail;
-	@Column(length = 20)
+	@Column(length = 20, nullable = false)
 	private String buyerPassword;
-	@Column(length = 10, unique = true)
+	@Column(length = 10, unique = true, nullable = false)
 	private String buyerPhoneNo;
 	@Column(length = 20)
 	private String buyerCity;

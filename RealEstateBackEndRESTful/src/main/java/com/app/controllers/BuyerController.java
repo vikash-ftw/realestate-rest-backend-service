@@ -103,4 +103,15 @@ public class BuyerController {
 	public ResponseEntity<?> unFavorite(@RequestBody PropertyBuyerLink pbl){
 		return new ResponseEntity<>(buyerService.unFav(pbl), HttpStatus.OK);
 	}
+	
+	@GetMapping("/allFav/{buyerId}")
+	public ResponseEntity<?> fetchAllFav(@PathVariable int buyerId)
+	{
+		try {
+			System.out.println("grab all buyers");
+			return new ResponseEntity<>(buyerService.grabAllfav(buyerId), HttpStatus.OK);
+		}catch(RuntimeException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+	}
 }
