@@ -109,4 +109,9 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 		return propertyDao.findByDimensionRange(length, breadth);
 	}
 
+	@Override
+	public List<LandProperty> fetchAllProps() {
+		return propertyDao.findAll();
+	}
+
 }

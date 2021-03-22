@@ -43,5 +43,7 @@ public interface ILandPropertyService {
 	//fetch prop by dimension
 	List<LandProperty> fetchPropertyByDimension(double length, double breadth);
 	
+	List<LandProperty> fetchAllProps();
+	
 
 }
