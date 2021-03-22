@@ -105,6 +105,11 @@ public class LandPropertyServiceImpl implements ILandPropertyService {
 	}
 	
 	@Override
+	public List<LandProperty> fetchPropertyByPriceGreater(double minPrice) {
+		return propertyDao.findByPropertyPriceGreaterThan(minPrice);
+	}
+	
+	@Override
 	public List<LandProperty> fetchPropertyByDimension(double length, double breadth) {
 		return propertyDao.findByDimensionRange(length, breadth);
 	}
