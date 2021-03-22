@@ -40,6 +40,9 @@ public interface ILandPropertyService {
 	//fetch prop by priceRange
 	List<LandProperty> fetchPropertyByPriceBetween(double minPrice, double maxPrice);
 	
+	// fetch prop by price greater than
+	List<LandProperty> fetchPropertyByPriceGreater(double minPrice); 
+	
 	//fetch prop by dimension
 	List<LandProperty> fetchPropertyByDimension(double length, double breadth);
 	

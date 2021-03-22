@@ -49,7 +49,7 @@ public class LandPropertyController {
 		return new ResponseEntity<>(propertyService.fetchPropByType(PropertyType.valueOf(propType.toUpperCase())), HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("ownerType/{ownerType}")
+	@GetMapping("ownershipType/{ownerType}")
 	public ResponseEntity<?> searchByOwnerType(@PathVariable String ownerType){
 		return new ResponseEntity<>(propertyService.fetchPropByOwnerType(OwnershipType.valueOf(ownerType.toUpperCase())),HttpStatus.ACCEPTED);
 	}
@@ -70,5 +70,10 @@ public class LandPropertyController {
 	@GetMapping("/city/{city}")
 	public ResponseEntity<?> fetchByCity(@PathVariable String city){
 		return new ResponseEntity<>(propertyService.fetchPropertyByCity(city), HttpStatus.OK);
+	}
+	
+	@GetMapping("/greaterThanPrice/{minPrice}")
+	public ResponseEntity<?> fetchByPriceGreaterThan(@PathVariable double minPrice){
+		return new ResponseEntity<>(propertyService.fetchPropertyByPriceGreater(minPrice), HttpStatus.OK);
 	}
 }

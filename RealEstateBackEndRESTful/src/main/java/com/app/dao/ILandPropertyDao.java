@@ -22,6 +22,8 @@ public interface ILandPropertyDao extends JpaRepository<LandProperty, Integer> {
 	List<LandProperty> findByPropertyCityContaining(String city);
 	
 	List<LandProperty> findByPropertyPriceBetween(double minPrice, double maxPrice);
+	
+	List<LandProperty> findByPropertyPriceGreaterThan(double minPrice);
 
 	List<LandProperty> findByOwnershipType(OwnershipType ownerType);
 	
