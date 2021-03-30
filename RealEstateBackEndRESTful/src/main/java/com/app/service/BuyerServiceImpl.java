@@ -48,6 +48,12 @@ public class BuyerServiceImpl implements IBuyerService {
 	public Buyer deleteByBuyerId(int buyerId) {
 		Buyer buyer = buyerDao.findById(buyerId)
 				.orElseThrow(() -> new MyCustomException("id " + buyerId + " not exist"));
+		Set<LandProperty> landSet = buyer.getLandProperties();
+		if(landSet.size() > 0) {
+			landSet.forEach( l -> {
+				buyer.removeFavProperty(l);
+			});
+		}
 		buyerDao.delete(buyer);
 		return buyer;
 	}
